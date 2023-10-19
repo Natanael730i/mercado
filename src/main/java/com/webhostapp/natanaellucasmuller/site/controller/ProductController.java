@@ -13,18 +13,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Controller
-@RequestMapping("/product")
+@RestController
+@RequestMapping("/produto")
 public class ProductController {
 
     @Autowired
     private ProductRepository repository;
 
-    @GetMapping("/list")
-    public List<ProductModel> list(){
-        return repository.findAll();
-    }
-    
     @PostMapping("/save")
     public ResponseEntity save(@RequestBody ProductModel product){
         repository.save(product);
@@ -58,5 +53,10 @@ public class ProductController {
         }
         repository.deleteById(id);
         return ResponseEntity.ok().body("Produto deletado com sucesso!");
+    }
+
+    @GetMapping("/listar")
+    public List<ProductModel> list(){
+        return repository.findAll();
     }
 }
